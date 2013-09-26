@@ -72,6 +72,17 @@ public class GoogleAnalyticsModule extends KrollModule
 		GAServiceManager.getInstance().setDispatchPeriod(interval);
 	}
 
+    @Kroll.setProperty
+    public void setCustomDimension(HashMap props)
+    {
+        KrollDict propsDict = new KrollDict(props);
+        long index = TiConvert.toInt(propsDict, "index");
+        String dimension = TiConvert.toString(propsDict, "dimension");
+
+        Tracker tracker = GAServiceManager.getDefaultTracker();
+        tracker.setCustomDimension(index, dimension);
+    }
+
 	@Kroll.setProperty
 	public void setOptOut(boolean optOut)
 	{

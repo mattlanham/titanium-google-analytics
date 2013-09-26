@@ -50,6 +50,20 @@
 
 #pragma mark Public APIs
 
+-(void)customDimension:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+    ENSURE_SINGLE_ARG(args, NSDictionary);
+
+    NSInteger *index;
+    NSString *dimension;
+
+    ENSURE_ARG_OR_NIL_FOR_KEY(index, args, @"index", NSNumber);
+    ENSURE_ARG_OR_NIL_FOR_KEY(dimension, args, @"dimension", NSString);
+
+    [tracker setCustom:index dimension:dimension];
+}
+
 -(void)trackEvent:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
